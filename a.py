@@ -47,17 +47,36 @@ class a:
 
 class data:
     def __init__(self):
-        self.number_of_survivors
-        self.number_of_survivors_that_were_below_age18
-        self.number_of_survivors_that_were_below_age60
-        self.number_of_surviors_between_age18and60
-        self.number_of_surviors_that_were_male
-        self.number_of_surviors_that_were_female
-        self.self.number_of_surviors_in_1stclass
-        self.self.number_of_surviors_in_2ndclass
-        self.self.number_of_surviors_in_3rdclass
+        self.number_of_survivors = 0
+        self.number_of_survivors_that_were_below_age18 = 0
+        self.number_of_survivors_that_were_below_age60 = 0
+        self.number_of_surviors_between_age18and60 = 0
+        self.number_of_surviors_that_were_male = 0
+        self.number_of_surviors_that_were_female = 0
+        self.number_of_surviors_in_1stclass = 0
+        self.number_of_surviors_in_2ndclass = 0
+        self.number_of_surviors_in_3rdclas = 0
 
-
+    def adding_data(self, key, value):
+        match key:
+            case 'number_of_survivors':
+                self.number_of_survivors = value
+            case 'number_of_survivors_that_were_below_age18':
+                self.number_of_survivors_that_were_below_age18 = value
+            case 'number_of_survivors_that_were_below_age60':
+                self.number_of_survivors_that_were_below_age60 = value
+            case 'number_of_surviors_between_age18and60':
+                self.number_of_surviors_between_age18and60 = value
+            case 'number_of_surviors_that_were_male':
+                self.number_of_surviors_that_were_male = value
+            case 'number_of_surviors_that_were_female':
+                self.number_of_surviors_that_were_female = value
+            case 'self.number_of_surviors_in_1stclass':
+                self.number_of_surviors_in_1stclass = value
+            case 'number_of_surviors_in_2ndclass':
+                self.number_of_surviors_in_2ndclass = value
+            case 'number_of_surviors_in_3rdclas':
+                self.number_of_surviors_in_3rdclas = value
 
 
 pd.options.display.max_rows = 10
@@ -110,3 +129,16 @@ def speed_test(df):
 
 print(counting_ppl_the_other_way(df, "PClass", "1st", 0))
 #  ^ Ostatni argument jest opcjonlany - 0 w celu oblicznia tyhc któży przeżyli
+# through
+
+data1 = data()
+
+
+def filling_number_of_survivors(df, data1, key, dff, keyy, keyy_value, survived=3):
+    data1.adding_data(key, counting_ppl_the_other_way(
+        dff, keyy, keyy_value, survived))
+
+
+filling_number_of_survivors(
+    df, data1, 'number_of_survivors', df, 'PClass', '1st', 0)
+print(data1.number_of_survivors)
