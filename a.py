@@ -29,17 +29,17 @@ class a:
                 else:
                     return 0
             case 'Age':
-                if self.Age == key_value:
+                if self.Age == key_value and self.Survived != Survived:
                     return 1
                 else:
                     return 0
             case 'Sex':
-                if self.Sex == key_value:
+                if self.Sex == key_value and self.Survived != Survived:
                     return 1
                 else:
                     return 0
             case 'Survived':
-                if self.Sex == key_value:
+                if self.Survived == key_value and self.Survived != Survived:
                     return 1
                 else:
                     return 0
@@ -139,6 +139,23 @@ def filling_number_of_survivors(df, data1, key, dff, keyy, keyy_value, survived=
         dff, keyy, keyy_value, survived))
 
 
+# wszyscy
 filling_number_of_survivors(
-    df, data1, 'number_of_survivors', df, 'PClass', '1st', 0)
+    df, data1, 'number_of_survivors', df, 'Survived', 1, 3)
 print(data1.number_of_survivors)
+
+
+def collecting_all_data():
+    filling_number_of_survivors(
+        df, data1, 'number_of_survivors', df, 'Survived', 1, 3)
+    filling_number_of_survivors(
+        df, data1, 'number_of_surviors_that_were_male', df, 'Sex', 'male', 0)
+    filling_number_of_survivors(
+        df, data1, 'number_of_surviors_that_were_male', df, 'Sex', 'male', 0)
+        
+
+
+collecting_all_data()
+print(data1.number_of_survivors)
+print(data1.number_of_surviors_that_were_male)
+print(counting_ppl_the_other_way(df, 'Sex', 'male', 0))
