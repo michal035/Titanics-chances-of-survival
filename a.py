@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import time
 
@@ -44,6 +45,15 @@ class a:
                 else:
                     return 0
 
+    def count_ppl_the_other_way_with_paratr(self, key, key_value, key_value1, key_value2, Survived=3):
+        if key == "Age" and self.Survived != Survived:
+            if self.Age >= key_value1 and self.Age <= key_value2:
+                return 1
+            else:
+                return 0
+        else:
+            return 0
+
 
 class data:
     def __init__(self):
@@ -71,7 +81,7 @@ class data:
                 self.number_of_surviors_that_were_male = value
             case 'number_of_surviors_that_were_female':
                 self.number_of_surviors_that_were_female = value
-            case 'self.number_of_surviors_in_1stclass':
+            case 'number_of_surviors_in_1stclass':
                 self.number_of_surviors_in_1stclass = value
             case 'number_of_surviors_in_2ndclass':
                 self.number_of_surviors_in_2ndclass = value
@@ -107,11 +117,20 @@ def counting_stuff(key, key_value):
     print(test.count_ppl("Age", 25))  # wiek i czy survived int
     """
 
+# szybsze
+
 
 def counting_ppl_the_other_way(df, key, key_value, survived=3):  # szybsze
     amm = 0
     for _ in range(len(df)):
         amm = amm + objs[_].count_ppl_the_other_way(key, key_value, survived)
+    return amm
+
+
+def count_ppl_the_other_way_with_paratr(key, key_value, key_value1, key_value2, survived=3):
+    amm = 0
+    for _ in range(len(df)):
+        amm = amm + objs[_].count_ppl_the_other_way_with_paratr(key, key_value, key_value1, key_value2, survived)
     return amm
 
 
@@ -151,11 +170,23 @@ def collecting_all_data():
     filling_number_of_survivors(
         df, data1, 'number_of_surviors_that_were_male', df, 'Sex', 'male', 0)
     filling_number_of_survivors(
-        df, data1, 'number_of_surviors_that_were_male', df, 'Sex', 'male', 0)
-        
+        df, data1, 'number_of_surviors_that_were_female', df, 'Sex', 'female', 0)
+    filling_number_of_survivors(
+        df, data1, 'number_of_surviors_in_1stclass', df, 'PClass', '1st', 0)
+    filling_number_of_survivors(
+        df, data1, 'number_of_surviors_in_2ndclass', df, 'PClass', '2nd', 0)
+    filling_number_of_survivors(
+        df, data1, 'number_of_surviors_in_3rdclass', df, 'PClass', '3rd', 0)
 
 
 collecting_all_data()
+
+
+"""
 print(data1.number_of_survivors)
 print(data1.number_of_surviors_that_were_male)
-print(counting_ppl_the_other_way(df, 'Sex', 'male', 0))
+print(data1.number_of_surviors_in_1stclass)
+print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
+"""
+
+print(count_ppl_the_other_way_with_paratr("Age", 60, 0, 18, 0))
