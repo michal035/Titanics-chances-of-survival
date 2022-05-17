@@ -130,7 +130,8 @@ def counting_ppl_the_other_way(df, key, key_value, survived=3):  # szybsze
 def count_ppl_the_other_way_with_paratr(key, key_value, key_value1, key_value2, survived=3):
     amm = 0
     for _ in range(len(df)):
-        amm = amm + objs[_].count_ppl_the_other_way_with_paratr(key, key_value, key_value1, key_value2, survived)
+        amm = amm + objs[_].count_ppl_the_other_way_with_paratr(
+            key, key_value, key_value1, key_value2, survived)
     return amm
 
 
@@ -156,6 +157,10 @@ data1 = data()
 def filling_number_of_survivors(df, data1, key, dff, keyy, keyy_value, survived=3):
     data1.adding_data(key, counting_ppl_the_other_way(
         dff, keyy, keyy_value, survived))
+
+
+def filling_number_of_survivors_with_paratr(data1, df, key, keyy, key_value, key_value1, key_value2, survived=3):
+    data1.adding_data(key, count_ppl_the_other_way_with_paratr(keyy,key_value,key_value1,key_value2,survived=3)) #here
 
 
 # wszyscy
@@ -189,4 +194,4 @@ print(data1.number_of_surviors_in_1stclass)
 print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
 """
 
-print(count_ppl_the_other_way_with_paratr("Age", 60, 0, 18, 0))
+print(count_ppl_the_other_way_with_paratr("Age", "NaN", 0, 18, 0))
