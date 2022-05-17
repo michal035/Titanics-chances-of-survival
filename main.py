@@ -66,6 +66,16 @@ class data:
         self.number_of_surviors_in_2ndclass = 0
         self.number_of_surviors_in_3rdclass = 0
 
+        self.number_of_passengers = 0
+        self.number_of_passengers_that_were_below_age18 = 0
+        self.number_of_passengers_that_were_below_age60 = 0
+        self.number_of_passengers_between_age18and60 = 0
+        self.number_of_passengers_that_were_male = 0
+        self.number_of_passengers_that_were_female = 0
+        self.number_of_passengers_in_1stclass = 0
+        self.number_of_passengers_in_2ndclass = 0
+        self.number_of_passengers_in_3rdclass = 0
+
     def adding_data(self, key, value):
         match key:
             case 'number_of_survivors':
@@ -159,15 +169,29 @@ def filling_number_of_survivors(df, data1, key, dff, keyy, keyy_value, survived=
 
 
 def filling_number_of_survivors_with_paratr(df, data1, key, keyy, key_value, key_value1, key_value2, survived=3):
-    data1.adding_data(key, count_ppl_the_other_way_with_paratr(keyy,key_value,key_value1,key_value2,survived=3)) #here
+    data1.adding_data(key, count_ppl_the_other_way_with_paratr(
+        keyy, key_value, key_value1, key_value2, survived=3))  # here
 
 
+def filling_number_of_passengers(df):
+        data1.number_of_passengers = 1313
+        data1.number_of_passengers_in_1stclass = counting_ppl_the_other_way(df,"PClass","1st")
+        data1.number_of_passengers_in_2ndclass = counting_ppl_the_other_way(df,"PClass", "2nd")
+        data1.number_of_passengers_in_3rdclass = counting_ppl_the_other_way(df,"PClass", "3rd")
+        data1.number_of_passengers_that_were_male = counting_ppl_the_other_way(df,"Sex","male")
+        data1.number_of_passengers_that_were_female = counting_ppl_the_other_way(df,"Sex","female")
+
+        data1.number_of_passengers_that_were_below_age18 = count_ppl_the_other_way_with_paratr("Age","NaN",0,18)
+        data1.number_of_passengers_that_were_below_age60 = count_ppl_the_other_way_with_paratr("Age","NaN",0,60)
+        data1.number_of_passengers_between_age18and60 = count_ppl_the_other_way_with_paratr("Age","NaN",19,60)
+        
 # wszyscy
 """
 filling_number_of_survivors(
     df, data1, 'number_of_survivors', df, 'Survived', 1, 3)
 print(data1.number_of_survivors)
 """
+
 
 def collecting_all_data():
     filling_number_of_survivors(
@@ -182,13 +206,16 @@ def collecting_all_data():
         df, data1, 'number_of_surviors_in_2ndclass', df, 'PClass', '2nd', 0)
     filling_number_of_survivors(
         df, data1, 'number_of_surviors_in_3rdclass', df, 'PClass', '3rd', 0)
-    filling_number_of_survivors_with_paratr(df,data1,'number_of_survivors_that_were_below_age18', 'Age', 'NaN',0,18,0)
-    filling_number_of_survivors_with_paratr(df,data1,'number_of_survivors_that_were_below_age60', 'Age', 'NaN',0,60,0)
-    filling_number_of_survivors_with_paratr(df,data1,'number_of_surviors_between_age18and60', 'Age', 'NaN',19,60,0)
+    filling_number_of_survivors_with_paratr(
+        df, data1, 'number_of_survivors_that_were_below_age18', 'Age', 'NaN', 0, 18, 0)
+    filling_number_of_survivors_with_paratr(
+        df, data1, 'number_of_survivors_that_were_below_age60', 'Age', 'NaN', 0, 60, 0)
+    filling_number_of_survivors_with_paratr(
+        df, data1, 'number_of_surviors_between_age18and60', 'Age', 'NaN', 19, 60, 0)
 
 
 collecting_all_data()
-
+filling_number_of_passengers(df)
 
 """
 print(data1.number_of_survivors)
@@ -197,5 +224,5 @@ print(data1.number_of_surviors_in_1stclass)
 print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
 print(data1.number_of_surviors_between_age18and60)
 """
-print(data1.number_of_surviors_in_3rdclass)
-
+print(data1.number_of_passengers_that_were_female)
+print(data1.number_of_surviors_that_were_female)
