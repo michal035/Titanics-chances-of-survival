@@ -59,7 +59,7 @@ class data:
         self.number_of_survivors = 0
         self.number_of_survivors_that_were_below_age18 = 0
         self.number_of_survivors_that_were_below_age60 = 0
-        self.number_of_surviors_between_age18and60 = 0
+        self.number_of_surviors_above_age_of_60 = 0
         self.number_of_surviors_that_were_male = 0
         self.number_of_surviors_that_were_female = 0
         self.number_of_surviors_in_1stclass = 0
@@ -69,7 +69,7 @@ class data:
         self.number_of_passengers = 0
         self.number_of_passengers_that_were_below_age18 = 0
         self.number_of_passengers_that_were_below_age60 = 0
-        self.number_of_passengers_between_age18and60 = 0
+        self.number_of_passengers_above_age_of_60 = 0
         self.number_of_passengers_that_were_male = 0
         self.number_of_passengers_that_were_female = 0
         self.number_of_passengers_in_1stclass = 0
@@ -84,8 +84,8 @@ class data:
                 self.number_of_survivors_that_were_below_age18 = value
             case 'number_of_survivors_that_were_below_age60':
                 self.number_of_survivors_that_were_below_age60 = value
-            case 'number_of_surviors_between_age18and60':
-                self.number_of_surviors_between_age18and60 = value
+            case 'number_of_surviors_above_age_of_60':
+                self.number_of_surviors_above_age_of_60 = value
             case 'number_of_surviors_that_were_male':
                 self.number_of_surviors_that_were_male = value
             case 'number_of_surviors_that_were_female':
@@ -170,7 +170,7 @@ def filling_number_of_survivors(df, data1, key, dff, keyy, keyy_value, survived=
 
 def filling_number_of_survivors_with_paratr(df, data1, key, keyy, key_value, key_value1, key_value2, survived=3):
     data1.adding_data(key, count_ppl_the_other_way_with_paratr(
-        keyy, key_value, key_value1, key_value2, survived=3))  # here
+        keyy, key_value, key_value1, key_value2, survived))  # here
 
 
 def filling_number_of_passengers(df):
@@ -183,7 +183,7 @@ def filling_number_of_passengers(df):
 
         data1.number_of_passengers_that_were_below_age18 = count_ppl_the_other_way_with_paratr("Age","NaN",0,18)
         data1.number_of_passengers_that_were_below_age60 = count_ppl_the_other_way_with_paratr("Age","NaN",0,60)
-        data1.number_of_passengers_between_age18and60 = count_ppl_the_other_way_with_paratr("Age","NaN",19,60)
+        data1.number_of_passengers_above_age_of_60 = count_ppl_the_other_way_with_paratr("Age","NaN",60,200)
         
 # wszyscy
 """
@@ -211,7 +211,7 @@ def collecting_all_data():
     filling_number_of_survivors_with_paratr(
         df, data1, 'number_of_survivors_that_were_below_age60', 'Age', 'NaN', 0, 60, 0)
     filling_number_of_survivors_with_paratr(
-        df, data1, 'number_of_surviors_between_age18and60', 'Age', 'NaN', 19, 60, 0)
+        df, data1, 'number_of_surviors_above_age_of_60', 'Age', 'NaN', 60, 200, 0)
 
 
 collecting_all_data()
@@ -222,7 +222,7 @@ print(data1.number_of_survivors)
 print(data1.number_of_surviors_that_were_male)
 print(data1.number_of_surviors_in_1stclass)
 print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
-print(data1.number_of_surviors_between_age18and60)
+print(data1.number_of_surviors_above_age_of_60)
 """
 print(data1.number_of_passengers_that_were_female)
 print(data1.number_of_surviors_that_were_female)

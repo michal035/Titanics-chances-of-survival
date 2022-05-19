@@ -18,7 +18,10 @@ PThirdClass = main.data1.number_of_passengers_in_3rdclass
 
 below18 = main.data1.number_of_survivors_that_were_below_age18
 below60 = main.data1.number_of_survivors_that_were_below_age60
-between18and60 = main.data1.number_of_surviors_between_age18and60
+above60 = main.data1.number_of_surviors_above_age_of_60
+Pbelow18 = main.data1.number_of_passengers_that_were_below_age18
+Pbelow60 = main.data1.number_of_passengers_that_were_below_age60
+Pabove60 = main.data1.number_of_passengers_above_age_of_60
 
 
 # Implemnt this in some time -> fig.savefig('out.png', dpi=100)
@@ -49,6 +52,13 @@ st = (FirstClass/PFirstClass)*100
 nd = (SecondClass/PSecondClass)*100
 rd = (ThirdClass/PThirdClass)*100
 
+b18 = (below18/Pbelow18)*100
+b60 = (below60/Pbelow60)*100
+a60 = (above60/Pabove60)*100
+
+
+print(above60)
+print(Pabove60)
 
 Pleft = [1, 2]
 Ptable = ["male", "female"]
@@ -59,8 +69,8 @@ height = [st, nd, rd]
 tick_label = ['1stClass', '2ndClass', '3rdClass']
 
 left2 = [1, 2, 3]
-heightt = [below18, below60, between18and60]
-trick_labell = ['<18', '<60', '18<x<60']
+heightt = [b18, b60, a60]
+trick_labell = ['<18', '<60', '>60']
 """
 plt.bar(left, height, tick_label=tick_label,
         width=0.8, color=['#99e6ff', '#0086b3', '#66d9ff'])
@@ -109,7 +119,7 @@ ax[1, 1].bar(left2, heightt, tick_label=trick_labell,
              width=0.8, color=['#cc5200', '#ff751a', '#ffb380'])
 ax[1, 1].set_xlabel('Age')
 ax[1, 1].set_ylabel('Number of Surviors')
-ax[1, 1].set_title('Number of Surviors based on passenger age of the pasanger')
+ax[1, 1].set_title('Chances of survival based on age of the pasanger')
 
 ax[1, 0].set_title('Chances of survival based on gender')
 ax[1, 0].bar(Pleft, Pheight, tick_label=Ptable,
