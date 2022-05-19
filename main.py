@@ -224,5 +224,5 @@ print(data1.number_of_surviors_in_1stclass)
 print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
 print(data1.number_of_surviors_above_age_of_60)
 """
-print(data1.number_of_passengers_that_were_female)
-print(data1.number_of_surviors_that_were_female)
+print(data1.number_of_passengers_that_were_below_age18)
+print(data1.number_of_survivors_that_were_below_age18)

@@ -71,6 +71,7 @@ tick_label = ['1stClass', '2ndClass', '3rdClass']
 left2 = [1, 2, 3]
 heightt = [b18, b60, a60]
 trick_labell = ['<18', '<60', '>60']
+
 """
 plt.bar(left, height, tick_label=tick_label,
         width=0.8, color=['#99e6ff', '#0086b3', '#66d9ff'])
@@ -134,9 +135,10 @@ plt.subplots_adjust(left=0.1,
                     top=0.9,
                     wspace=0.9,
                     hspace=0.9)
-
 # fig.tight_layout()
 fig.set_size_inches(8.5, 6)
 fig.savefig('testpng', dpi=100)
+
+fig.canvas.manager.set_window_title('Data analysis and prediction of survivors on the titanic dataset')
 plt.show()
-#last changes didn't save - test push
+
