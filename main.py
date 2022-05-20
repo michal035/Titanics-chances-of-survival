@@ -69,12 +69,12 @@ class data:
         self.number_of_survivors = 0
         self.number_of_survivors_that_were_below_age18 = 0
         self.number_of_survivors_that_were_below_age60 = 0
-        self.number_of_surviors_above_age_of_60 = 0
-        self.number_of_surviors_that_were_male = 0
-        self.number_of_surviors_that_were_female = 0
-        self.number_of_surviors_in_1stclass = 0
-        self.number_of_surviors_in_2ndclass = 0
-        self.number_of_surviors_in_3rdclass = 0
+        self.number_of_survivors_above_age_of_60 = 0
+        self.number_of_survivors_that_were_male = 0
+        self.number_of_survivors_that_were_female = 0
+        self.number_of_survivors_in_1stclass = 0
+        self.number_of_survivors_in_2ndclass = 0
+        self.number_of_survivors_in_3rdclass = 0
 
         self.number_of_passengers = 0
         self.number_of_passengers_that_were_below_age18 = 0
@@ -96,18 +96,18 @@ class data:
                 self.number_of_survivors_that_were_below_age18 = value
             case 'number_of_survivors_that_were_below_age60':
                 self.number_of_survivors_that_were_below_age60 = value
-            case 'number_of_surviors_above_age_of_60':
-                self.number_of_surviors_above_age_of_60 = value
-            case 'number_of_surviors_that_were_male':
-                self.number_of_surviors_that_were_male = value
-            case 'number_of_surviors_that_were_female':
-                self.number_of_surviors_that_were_female = value
-            case 'number_of_surviors_in_1stclass':
-                self.number_of_surviors_in_1stclass = value
-            case 'number_of_surviors_in_2ndclass':
-                self.number_of_surviors_in_2ndclass = value
-            case 'number_of_surviors_in_3rdclass':
-                self.number_of_surviors_in_3rdclass = value
+            case 'number_of_survivors_above_age_of_60':
+                self.number_of_survivors_above_age_of_60 = value
+            case 'number_of_survivors_that_were_male':
+                self.number_of_survivors_that_were_male = value
+            case 'number_of_survivors_that_were_female':
+                self.number_of_survivors_that_were_female = value
+            case 'number_of_survivors_in_1stclass':
+                self.number_of_survivors_in_1stclass = value
+            case 'number_of_survivors_in_2ndclass':
+                self.number_of_survivors_in_2ndclass = value
+            case 'number_of_survivors_in_3rdclass':
+                self.number_of_survivors_in_3rdclass = value
 
 
 pd.options.display.max_rows = 10
@@ -184,7 +184,7 @@ def filling_number_of_survivors_with_paratr(df, data1, key, keyy, key_value, key
 #Here we collect we pass data about passengers not survivors 
 
 def filling_number_of_passengers(df):
-        data1.number_of_passengers = 1313
+        data1.number_of_passengers = len(df)
         data1.number_of_passengers_in_1stclass = counting_ppl_the_other_way(df,"PClass","1st")
         data1.number_of_passengers_in_2ndclass = counting_ppl_the_other_way(df,"PClass", "2nd")
         data1.number_of_passengers_in_3rdclass = counting_ppl_the_other_way(df,"PClass", "3rd")
@@ -201,35 +201,36 @@ def collecting_all_data():
     filling_number_of_survivors(
         df, data1, 'number_of_survivors', df, 'Survived', 1, 3)
     filling_number_of_survivors(
-        df, data1, 'number_of_surviors_that_were_male', df, 'Sex', 'male', 0)
+        df, data1, 'number_of_survivors_that_were_male', df, 'Sex', 'male', 0)
     filling_number_of_survivors(
-        df, data1, 'number_of_surviors_that_were_female', df, 'Sex', 'female', 0)
+        df, data1, 'number_of_survivors_that_were_female', df, 'Sex', 'female', 0)
     filling_number_of_survivors(
-        df, data1, 'number_of_surviors_in_1stclass', df, 'PClass', '1st', 0)
+        df, data1, 'number_of_survivors_in_1stclass', df, 'PClass', '1st', 0)
     filling_number_of_survivors(
-        df, data1, 'number_of_surviors_in_2ndclass', df, 'PClass', '2nd', 0)
+        df, data1, 'number_of_survivors_in_2ndclass', df, 'PClass', '2nd', 0)
     filling_number_of_survivors(
-        df, data1, 'number_of_surviors_in_3rdclass', df, 'PClass', '3rd', 0)
+        df, data1, 'number_of_survivors_in_3rdclass', df, 'PClass', '3rd', 0)
     filling_number_of_survivors_with_paratr(
         df, data1, 'number_of_survivors_that_were_below_age18', 'Age', 'NaN', 0, 18, 0)
     filling_number_of_survivors_with_paratr(
         df, data1, 'number_of_survivors_that_were_below_age60', 'Age', 'NaN', 0, 60, 0)
     filling_number_of_survivors_with_paratr(
-        df, data1, 'number_of_surviors_above_age_of_60', 'Age', 'NaN', 60, 200, 0)
+        df, data1, 'number_of_survivors_above_age_of_60', 'Age', 'NaN', 60, 200, 0)
 
 
 collecting_all_data()
 filling_number_of_passengers(df)
 
-#Here are some test play around
+#Here are some tests ->  play around
 
-"""
 print(data1.number_of_survivors)
-print(data1.number_of_surviors_that_were_male)
-print(data1.number_of_surviors_in_1stclass)
+print(data1.number_of_passengers)
+print(data1.number_of_survivors_that_were_male)
+print(data1.number_of_survivors_in_1stclass)
 print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
-print(data1.number_of_surviors_above_age_of_60)
+print(data1.number_of_survivors_above_age_of_60)
 
 print(data1.number_of_passengers_that_were_below_age18)
 print(data1.number_of_survivors_that_were_below_age18)
-"""
+
+
