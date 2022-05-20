@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 
+#Class with data of every passenger on board
 
 class a:
     def __init__(self, Name="None", PClass="None", Age="None", Sex="None", Survived=0):
@@ -9,6 +10,8 @@ class a:
         self.Age = Age
         self.Sex = Sex
         self.Survived = Survived
+
+# Count certain parameter - Age 19, this is worst way to count ppl - we are checking data directly from .csv file not from our class
 
     def count_ppl(self, key, key_value):
         amount_of_ppl = 0
@@ -20,6 +23,10 @@ class a:
             if df.iloc[_][key] == key_value:  # here
                 amount_of_ppl = amount_of_ppl + 1
         return amount_of_ppl
+
+#This is better faster way to count people, it's checking data from our class not from .csv file
+# Count certain parameter - Age 19 but it can return either everyone or only passengers that survived, in order to count survivers last parameter needs to be 0
+# I don't think i resolved this in the bets possible way, but i wanted it to be kind of universal, that's why it looks how it looks
 
     def count_ppl_the_other_way(self, key, key_value, Survived=3):
         match key:
@@ -44,6 +51,8 @@ class a:
                 else:
                     return 0
 
+#This funcion is just to count people in certain age range - key_value1 to key_value2
+
     def count_ppl_the_other_way_with_paratr(self, key, key_value, key_value1, key_value2, Survived=3):
         if key == "Age" and self.Survived != Survived:
             if self.Age >= key_value1 and self.Age < key_value2:
@@ -53,6 +62,7 @@ class a:
         else:
             return 0
 
+#Here is class just to store each 'variable'
 
 class data:
     def __init__(self):
@@ -75,6 +85,8 @@ class data:
         self.number_of_passengers_in_1stclass = 0
         self.number_of_passengers_in_2ndclass = 0
         self.number_of_passengers_in_3rdclass = 0
+
+#Self explanatory
 
     def adding_data(self, key, value):
         match key:
@@ -100,22 +112,16 @@ class data:
 
 pd.options.display.max_rows = 10
 
-df = pd.read_csv('Titanic.csv')
+df = pd.read_csv('Titanic.csv') # You can use different file, as long as all of the columns and data types in are in the same order
 
-
-# objs = [a() for _ in range(len(df))]
+# Here is created object for each row in .csv file
 
 objs = [a(df.iloc[_, 0], df.iloc[_, 1], df.iloc[_, 2],
           df.iloc[_, 3], df.iloc[_, 4]) for _ in range(len(df))]
 
 test = a()
 
-"""
-for _ in range(10):
-    print(objs[_].name, objs[_].Pclass, objs[_].age,
-          objs[_].psex, objs[_].Survived)
-"""
-
+# Most basic way to count people-  slow, bad, getting data from .csv
 
 def counting_stuff(key, key_value):
 
@@ -123,18 +129,21 @@ def counting_stuff(key, key_value):
 
     """
     print(test.count_ppl("PClass", "1st"))
-    print(test.count_ppl("Age", 25))  # wiek i czy survived int
+    print(test.count_ppl("Age", 25))  
     """
 
-# szybsze
+# Better faster, better way to count people, with survived paramter - on deafult it will count all the passengers
 
-
-def counting_ppl_the_other_way(df, key, key_value, survived=3):  # szybsze
+def counting_ppl_the_other_way(df, key, key_value, survived=3):  
     amm = 0
     for _ in range(len(df)):
         amm = amm + objs[_].count_ppl_the_other_way(key, key_value, survived)
     return amm
 
+# example use case -> last agrgument is optional - pass 0 in order to count only survivors
+#print(counting_ppl_the_other_way(df, "PClass", "1st", 0))
+
+# Same function, just to count people of certain age (18-60 etc.)
 
 def count_ppl_the_other_way_with_paratr(key, key_value, key_value1, key_value2, survived=3):
     amm = 0
@@ -143,6 +152,7 @@ def count_ppl_the_other_way_with_paratr(key, key_value, key_value1, key_value2, 
             key, key_value, key_value1, key_value2, survived)
     return amm
 
+#Here is function so u can check the speed of each functions yourself 
 
 def speed_test(df):
     s = time.time()
@@ -153,25 +163,25 @@ def speed_test(df):
     print(counting_stuff("PClass", "1st"))
     print(time.time() - s)
 
-
 # speed_test(df)
 
-#print(counting_ppl_the_other_way(df, "PClass", "1st", 0))
-#  ^ Ostatni argument jest opcjonlany - 0 w celu oblicznia tyhc któży przeżyli
-# through
+# through -> don't pay attanetion to this 
 
 data1 = data()
 
+#Here we is function fill our data class with actual data
 
 def filling_number_of_survivors(df, data1, key, dff, keyy, keyy_value, survived=3):
     data1.adding_data(key, counting_ppl_the_other_way(
         dff, keyy, keyy_value, survived))
 
+#Here is function to add data with age range
 
 def filling_number_of_survivors_with_paratr(df, data1, key, keyy, key_value, key_value1, key_value2, survived=3):
     data1.adding_data(key, count_ppl_the_other_way_with_paratr(
-        keyy, key_value, key_value1, key_value2, survived))  # here
+        keyy, key_value, key_value1, key_value2, survived))  
 
+#Here we collect we pass data about passengers not survivors 
 
 def filling_number_of_passengers(df):
         data1.number_of_passengers = 1313
@@ -185,13 +195,7 @@ def filling_number_of_passengers(df):
         data1.number_of_passengers_that_were_below_age60 = count_ppl_the_other_way_with_paratr("Age","NaN",0,60)
         data1.number_of_passengers_above_age_of_60 = count_ppl_the_other_way_with_paratr("Age","NaN",60,200)
         
-# wszyscy
-"""
-filling_number_of_survivors(
-    df, data1, 'number_of_survivors', df, 'Survived', 1, 3)
-print(data1.number_of_survivors)
-"""
-
+#Here we actually add data of survivors
 
 def collecting_all_data():
     filling_number_of_survivors(
@@ -217,12 +221,15 @@ def collecting_all_data():
 collecting_all_data()
 filling_number_of_passengers(df)
 
+#Here are some test play around
+
 """
 print(data1.number_of_survivors)
 print(data1.number_of_surviors_that_were_male)
 print(data1.number_of_surviors_in_1stclass)
 print(counting_ppl_the_other_way(df, 'PClass', '1st', 0))
 print(data1.number_of_surviors_above_age_of_60)
-"""
+
 print(data1.number_of_passengers_that_were_below_age18)
 print(data1.number_of_survivors_that_were_below_age18)
+"""
