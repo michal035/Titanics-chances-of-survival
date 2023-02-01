@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 
+
 #Class with data of every passenger on board
 
 class a:
@@ -11,18 +12,6 @@ class a:
         self.Sex = Sex
         self.Survived = Survived
 
-# Count certain parameter - Age 19, this is worst way to count ppl - we are checking data directly from .csv file not from our class
-
-    def count_ppl(self, key, key_value):
-        amount_of_ppl = 0
-        list_of_stuff = ["Name", "PClass", "Age",
-                         "Sex", "Survived"], [0, 1, 2, 3, 4]
-        key = list_of_stuff[0].index(key)
-        key = list_of_stuff[1][key]
-        for _ in range(len(df)):
-            if df.iloc[_][key] == key_value:  # here
-                amount_of_ppl = amount_of_ppl + 1
-        return amount_of_ppl
 
 #This is better faster way to count people, it's checking data from our class not from .csv file
 # Count certain parameter - Age 19 but it can return either everyone or only passengers that survived, in order to count survivers last parameter needs to be 0
