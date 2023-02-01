@@ -2,7 +2,10 @@ import pandas as pd
 import time
 
 
-#Class with data of every passenger on board
+
+# THIS IS MY OLD CODE IT BADLY NEEDS A REMAKE IT'S NOT THAT IMPORTANT 
+# It just counts how many people from each category  survived - how many woman that are aged <60 etc.
+
 
 class a:
     def __init__(self, Name="None", PClass="None", Age="None", Sex="None", Survived=0):
